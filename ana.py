@@ -125,3 +125,17 @@ if __name__ == '__main__':
     #update_data()
     ana()
 
+df0 = pd.read_csv('time_series_19-covid-Confirmed.csv')
+dates = ['%s月%s日' % (v1[0], v1[1]) for v1 in [v.split('/')[:2] for v in df0.columns[4:]]]
+dates = [(df0.columns[4:][i], dates[i]) for i in range(len(dates))]
+df0 = df0.rename(columns=dict(dates))
+df1 = df0.groupby('Country/Region').sum().reset_index()
+
+top30_cn_str = '''中国大陆 意大利 伊朗 韩国 法国 西班牙 美国 德国 钻石公主号邮轮 日本 瑞士 挪威 英国 荷兰 瑞典 比利时 丹麦 奥地利 新加坡 马来西亚 香港特别行政区 巴林王国 澳大利亚 希腊 加拿大 阿联酋 伊拉克 科威特 冰岛 埃及'''
+top30_cn = top30_cn_str.split(' ')
+names = ['Mainland China', 'Italy', 'Iran (Islamic Republic of)',
+         'Republic of Korea', 'France', 'Spain', 'US', 'Germany', 'Others',
+         'Japan', 'Switzerland', 'Norway', 'UK', 'Netherlands', 'Sweden',
+         'Belgium', 'Denmark', 'Austria', 'Singapore', 'Malaysia',
+         'Hong Kong SAR', 'Bahrain', 'Australia', 'Greece', 'Canada',
+         'United Arab Emirates', 'Iraq', 'Kuwait', 'Iceland', 'Egypt']
