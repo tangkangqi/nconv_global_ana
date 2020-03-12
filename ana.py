@@ -22,8 +22,7 @@ def ana():
     df0 = df0.rename(columns=dict(dates))
     df1 = df0.groupby('Country/Region').sum().reset_index()
 
-    top30_cn_str = '中国大陆 意大利 伊朗 韩国 法国 西班牙 美国 德国 钻石公主号邮轮 日本 瑞士 挪威 英国 荷兰 瑞典 \
-    比利时 丹麦 奥地利 新加坡 马来西亚 香港特别行政区 巴林王国 澳大利亚 希腊 加拿大 阿联酋 伊拉克 科威特 冰岛 埃及'
+    top30_cn_str = '''中国大陆 意大利 伊朗 韩国 法国 西班牙 美国 德国 钻石公主号邮轮 日本 瑞士 挪威 英国 荷兰 瑞典 比利时 丹麦 奥地利 新加坡 马来西亚 香港特别行政区 巴林王国 澳大利亚 希腊 加拿大 阿联酋 伊拉克 科威特 冰岛 埃及'''
     top30_cn = top30_cn_str.split(' ')
     names = ['Mainland China', 'Italy', 'Iran (Islamic Republic of)',
              'Republic of Korea', 'France', 'Spain', 'US', 'Germany', 'Others',
@@ -34,6 +33,7 @@ def ana():
 
     top30_cn_dict = dict([(names[i], top30_cn[i]) for i in range(30)])
     df2 = df1.sort_values('3月10日', ascending=False)[:30].reset_index()
+    print(top30_cn)
     df2['国家/地区'] = top30_cn
 
     tp = df0.groupby('Province/State').sum().reset_index()
@@ -119,6 +119,7 @@ def ana():
     plt.legend(prop=myfont, fontsize=30, loc=0)
     plt.title("4.各国家/地区确诊病例突破100人后的时序增长图-对数拟合", fontproperties=myfont, fontsize=22)
     plt.savefig('4各国家地区确诊病例突破100人后的时序增长图-对数拟合.png')
+    plt.show()
 
 if __name__ == '__main__':
     #update_data()
